@@ -5,8 +5,8 @@ services:
     container_name: prometheus
     restart: always
     ports:
-      - "9090:9090"
-      - "9091:9091"
+      - "192.168.56.200:9090:9090"
+      - "192.168.56.200:9091:9091"
     volumes:
       - prometheus_data:/prometheus
       - /etc/localtime:/etc/localtime:ro
@@ -19,8 +19,8 @@ services:
     container_name: grafana
     restart: always
     ports:
-      - "3000:3000"
-      - "3001:3001"
+      - "192.168.56.200:3000:3000"
+      - "192.168.56.200:3001:3001"
     volumes:
       - grafana_data:/var/lib/grafana
       - /etc/localtime:/etc/localtime:ro
