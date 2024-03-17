@@ -1,0 +1,38 @@
+version: "3"
+services:
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    restart: always
+    ports:
+      - "192.168.1.46:9090:9090"
+      - "192.168.1.46:9091:9091"
+    volumes:
+      - prometheus_data:/prometheus
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - TZ=Europe/Moscow
+      - DATA_SOURCE_NAME=prometheus
+
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    restart: always
+    ports:
+      - "192.168.1.46:3000:3000"
+      - "192.168.1.46:3001:3001"
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=dkcm123qweASD
+      - GF_USERS_ALLOW_SIGN_UP=false
+      - GF_USERS_ALLOW_ORG_CREATE=true
+      - GF_TIMEZONE=Europe/Moscow
+
+volumes:
+  prometheus_data:
+    driver: local
+  grafana_data:
+    driver: local

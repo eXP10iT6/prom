@@ -1,0 +1,18 @@
+version: '2'
+services:
+  portainer:
+    image: portainer/portainer:latest
+    container_name: portainer
+    restart: always
+    ports:
+      - "192.168.1.46:9000:9000"
+      - "192.168.1.46:9443:9443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+
+volumes:
+  portainer_data:
+    driver: local
